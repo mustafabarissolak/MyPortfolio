@@ -1,0 +1,62 @@
+﻿@using MyPortfolio.Application.Features.Queries.SkillQueries.GetAllSkills
+@model GetAllSkillsQueryResponse
+@{
+    byte sayac = 1;
+}
+<section id="skills" class="skills">
+    <div class="skill-content">
+        <div class="section-heading text-center">
+            <h2>Beceriler</h2>
+        </div>
+        @if (Model.SkillDtos!.Any())
+        {
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model.SkillDtos!)
+                    {
+                        @if (sayac % 2 == 1)
+                        {
+                            <div class="col-md-6">
+                                <div class="single-skill-content">
+                                    <div class="barWrapper">
+                                        <span class="progressText">@item.Name</span>
+                                        <div class="single-progress-txt">
+                                            <div class="progress ">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="10" aria-valuemax="100" style="">
+                                                </div>
+                                            </div>
+                                            <h3>@item.Value.ToString()%</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                <div class="single-skill-content">
+                                    <div class="barWrapper">
+                                        <span class="progressText">@item.Name</span>
+                                        <div class="single-progress-txt">
+                                            <div class="progress ">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="10" aria-valuemax="100" style="">
+                                                </div>
+                                            </div>
+                                            <h3>@item.Value.ToString()%</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        sayac++;
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <h3>Henüz bir beceriniz yok</h3>
+        }
+    </div>
+</section>
+
