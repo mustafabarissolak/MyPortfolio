@@ -14,7 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\MyPortfolio.Infrastructure\MyPortfolio.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\MyPortfolio.Persistance\MyPortfolio.Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
 </Project>

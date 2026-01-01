@@ -11,6 +11,6 @@ public sealed class About : BaseEntity
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public string? WebSite { get; set; }
-    public string? ImageUrl { get; set; }
-    public List<SocialMediaAccount>? SocialMediaAccount { get; set; }
+
+    public Image? Image { get; set; }
 }

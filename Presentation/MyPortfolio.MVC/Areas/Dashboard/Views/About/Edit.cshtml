@@ -1,0 +1,72 @@
+﻿@using MyPortfolio.Application.Features.Commands.AboutCommands.UpdateAbout
+@model UpdateAboutCommandRequest
+
+@{
+    ViewData["Title"] = "Update About";
+}
+
+<div class="col-12">
+    <div class="bg-secondary rounded p-4">
+        <h6 class="mb-4">Hakkımda Güncelle</h6>
+
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImagePath" />
+
+            <div class="form-floating mb-3">
+                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name">Ad</label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Field" class="form-control" />
+                <label asp-for="Field">Alan</label>
+                <span asp-validation-for="Field" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Title" class="form-control" />
+                <label asp-for="Title">Başlık</label>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="PhoneNumber" class="form-control" />
+                <label asp-for="PhoneNumber">Tel No</label>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Email" type="email" class="form-control" />
+                <label asp-for="Email">Email</label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="WebSite" class="form-control" />
+                <label asp-for="WebSite">Web Site Url</label>
+                <span asp-validation-for="WebSite" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Description" class="form-control" />
+                <label asp-for="Description">Açıklama</label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Görsel Yükle</label>
+                <input type="file"
+                       name="file"
+                       class="form-control bg-dark"
+                       accept="image/*"/>
+            </div>
+
+            <button type="submit" class="btn btn-outline-success m-2">Kaydet</button>
+            <a asp-action="Index" class="btn btn-outline-light m-2">Geri Dön</a>
+
+        </form>
+    </div>
+</div>
+

@@ -1,4 +1,6 @@
 ﻿using MyPortfolio.Application;
+using MyPortfolio.Infrastructure;
+using MyPortfolio.Infrastructure.Storages.Local;
 using MyPortfolio.Persistance;
 using MyPortfolio.Persistance.SeedAdmin;
 
@@ -6,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistanceService(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureService();
+builder.Services.AddStorage<LocalStorage>();
 
 builder.Services.AddControllersWithViews();
 

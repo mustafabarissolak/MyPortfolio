@@ -2,7 +2,7 @@
 
 namespace MyPortfolio.Application.Features.Queries.SkillQueries.GetByIdSkills;
 
-public class GetByIdQueryRequest : IRequest<GetByIdQueryResponse>
+public class GetByIdSkillQueryRequest : IRequest<GetByIdSkillQueryResponse>
 {
     public string? Id { get; set; }
 }

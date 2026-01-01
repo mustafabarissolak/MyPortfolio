@@ -12,8 +12,8 @@ using MyPortfolio.Persistance.Context;
 namespace MyPortfolio.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251227031453_mig_1")]
-    partial class mig_1
+    [Migration("20251231213248_mig_2")]
+    partial class mig_2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,7 +151,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("Field")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("ImageId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -386,6 +386,38 @@ namespace MyPortfolio.Persistance.Migrations
                     b.ToTable("Experiences");
                 });
 
+            modelBuilder.Entity("MyPortfolio.Core.Entities.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AboutId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AboutId")
+                        .IsUnique()
+                        .HasFilter("[AboutId] IS NOT NULL");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("MyPortfolio.Core.Entities.Skill", b =>
                 {
                     b.Property<string>("Id")
@@ -464,8 +496,8 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -480,6 +512,8 @@ namespace MyPortfolio.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("WelcomeAreas");
                 });
@@ -535,16 +569,37 @@ namespace MyPortfolio.Persistance.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyPortfolio.Core.Entities.Image", b =>
+                {
+                    b.HasOne("MyPortfolio.Core.Entities.About", "About")
+                        .WithOne("Image")
+                        .HasForeignKey("MyPortfolio.Core.Entities.Image", "AboutId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("About");
+                });
+
             modelBuilder.Entity("MyPortfolio.Core.Entities.SocialMediaAccount", b =>
                 {
                     b.HasOne("MyPortfolio.Core.Entities.About", null)
-                        .WithMany("SocialMediaAccount")
+                        .WithMany("SocialMediaAccounts")
                         .HasForeignKey("AboutId");
+                });
+
+            modelBuilder.Entity("MyPortfolio.Core.Entities.WelcomeArea", b =>
+                {
+                    b.HasOne("MyPortfolio.Core.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("MyPortfolio.Core.Entities.About", b =>
                 {
-                    b.Navigation("SocialMediaAccount");
+                    b.Navigation("Image");
+
+                    b.Navigation("SocialMediaAccounts");
                 });
 #pragma warning restore 612, 618
         }

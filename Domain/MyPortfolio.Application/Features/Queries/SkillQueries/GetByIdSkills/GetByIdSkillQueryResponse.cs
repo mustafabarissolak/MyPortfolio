@@ -2,7 +2,7 @@
 
 namespace MyPortfolio.Application.Features.Queries.SkillQueries.GetByIdSkills;
 
-public class GetByIdQueryResponse
+public class GetByIdSkillQueryResponse
 {
     public SkillDto? SkillDto { get; set; }
 }

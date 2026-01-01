@@ -18,7 +18,7 @@ public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
 
     public void Remove(T entity) => Table.Remove(entity);
 
-    public async Task RemoveById(string id) => Table.Remove((await Table.FirstOrDefaultAsync(e => e.Id == id)));
+    public async Task RemoveByIdAsync(string id) => Table.Remove((await Table.FirstOrDefaultAsync(e => e.Id == id))!);
 
     public void RemoveRange(List<T> entities) => Table.RemoveRange(entities);
 

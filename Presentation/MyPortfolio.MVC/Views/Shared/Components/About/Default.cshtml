@@ -1,81 +1,112 @@
-﻿<section id="about" class="about">
-    <div class="section-heading text-center">
-        <h2>about me</h2>
-    </div>
-    <div class="container">
-        <div class="about-content">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="single-about-txt">
-                        <h3>
-                            I am a Professional UI/UX Designer and Web developer. Consectetur an adipisi elita, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud.
-                        </h3>
-                        <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspi unde omnis iste natus error sit voluptatem accusantium doloremque lauda ntium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam vo luptatem quia voluptas sit aspernatur aut odit aut fugit,
-                        </p>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="single-about-add-info">
-                                    <h3>phone</h3>
-                                    <p>987-123-6547</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="single-about-add-info">
-                                    <h3>email</h3>
-                                    <p>browny@info.com</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="single-about-add-info">
-                                    <h3>website</h3>
-                                    <p>www.brownsine.com</p>
-                                </div>
+﻿@model AboutViewModel
+
+@if (Model?.AboutVM != null)
+{
+    <section id="about" class="about">
+        <div class="section-heading text-center">
+            <h2>about me</h2>
+        </div>
+
+        <div class="container">
+            <div class="about-content">
+                <div class="row">
+
+                    <!-- LEFT -->
+                    <div class="col-sm-6">
+                        <div class="single-about-txt">
+
+                            @* TITLE / FIELD *@
+                            @if (!string.IsNullOrWhiteSpace(Model.AboutVM.Title))
+                            {
+                                <h3>@Model.AboutVM.Title</h3>
+                            }
+
+                            @* DESCRIPTION *@
+                            @if (!string.IsNullOrWhiteSpace(Model.AboutVM.Description))
+                            {
+                                <p>@Model.AboutVM.Description</p>
+                            }
+
+                            <div class="row">
+
+                                @* PHONE *@
+                                @if (!string.IsNullOrWhiteSpace(Model.AboutVM.PhoneNumber))
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="single-about-add-info">
+                                            <h3>phone</h3>
+                                            <p>@Model.AboutVM.PhoneNumber</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @* EMAIL *@
+                                @if (!string.IsNullOrWhiteSpace(Model.AboutVM.Email))
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="single-about-add-info">
+                                            <h3>email</h3>
+                                            <p>
+                                                <a href="mailto:@Model.AboutVM.Email">
+                                                    @Model.AboutVM.Email
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+
+                                @* WEBSITE *@
+                                @if (!string.IsNullOrWhiteSpace(Model.AboutVM.WebSite))
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="single-about-add-info">
+                                            <h3>website</h3>
+                                            <p>
+                                                <a href="@Model.AboutVM.WebSite" target="_blank">
+                                                    @Model.AboutVM.WebSite
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-offset-1 col-sm-5">
-                    <div class="single-about-img">
-                        <img src="~/front-end/assets/images/about/profile_image.jpg" alt="profile_image">
-                        <div class="about-list-icon">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                                    </a>
-                                </li><!-- / li -->
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                                    </a>
 
-                                </li><!-- / li -->
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                                    </a>
+                    <!-- RIGHT -->
+                    <div class="col-sm-offset-1 col-sm-5">
+                        <div class="single-about-img">
 
-                                </li><!-- / li -->
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                    </a>
-                                </li><!-- / li -->
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                                    </a>
-                                </li><!-- / li -->
+                            @* PROFILE IMAGE *@
+                            <img src="@Model.AboutVM.ImagePath" alt="profile_image" />
 
+                            @* SOCIAL MEDIA *@
+                            @if (Model.SocialMediaAccountsVM?.Any() == true)
+                            {
+                                <div class="about-list-icon">
+                                    <ul>
+                                        @foreach (var item in Model.SocialMediaAccountsVM)
+                                        {
+                                            if (!string.IsNullOrWhiteSpace(item.Url) &&
+                                            !string.IsNullOrWhiteSpace(item.IconCode))
+                                            {
+                                                <li>
+                                                    <a href="@item.Url" target="_blank">
+                                                        <i class="@item.IconCode" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            }
 
-                            </ul><!-- / ul -->
-                        </div><!-- /.about-list-icon -->
-
+                        </div>
                     </div>
 
                 </div>
             </div>
         </div>
-    </div>
-</section><!--/.about-->
+    </section>
+}

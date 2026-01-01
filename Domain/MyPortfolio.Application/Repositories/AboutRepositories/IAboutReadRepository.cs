@@ -2,4 +2,7 @@
 
 namespace MyPortfolio.Application.Repositories.AboutRepositories;
 
-public interface IAboutReadRepository : IReadRepository<About> { }
+public interface IAboutReadRepository : IReadRepository<About> 
+{
+    Task<About> GetSingleAsync();
+}

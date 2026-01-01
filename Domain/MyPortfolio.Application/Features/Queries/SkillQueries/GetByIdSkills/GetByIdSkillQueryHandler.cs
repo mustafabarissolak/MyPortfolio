@@ -5,16 +5,16 @@ using MyPortfolio.Core.Entities;
 
 namespace MyPortfolio.Application.Features.Queries.SkillQueries.GetByIdSkills;
 
-public class GetByIdQueryHandler : IRequestHandler<GetByIdQueryRequest, GetByIdQueryResponse>
+public class GetByIdSkillQueryHandler : IRequestHandler<GetByIdSkillQueryRequest, GetByIdSkillQueryResponse>
 {
     readonly ISkillReadRepository _repository;
 
-    public GetByIdQueryHandler(ISkillReadRepository repository)
+    public GetByIdSkillQueryHandler(ISkillReadRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<GetByIdQueryResponse> Handle(GetByIdQueryRequest request, CancellationToken cancellationToken)
+    public async Task<GetByIdSkillQueryResponse> Handle(GetByIdSkillQueryRequest request, CancellationToken cancellationToken)
     {
         Skill skill = await _repository.GetByIdAsync(request.Id!);
 

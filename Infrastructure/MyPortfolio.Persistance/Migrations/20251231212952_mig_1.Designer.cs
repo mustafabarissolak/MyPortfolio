@@ -12,8 +12,8 @@ using MyPortfolio.Persistance.Context;
 namespace MyPortfolio.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251226035447_InitCreate")]
-    partial class InitCreate
+    [Migration("20251231212952_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,7 +139,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -149,9 +149,6 @@ namespace MyPortfolio.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Field")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -166,7 +163,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WebSite")
@@ -283,7 +280,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -301,7 +298,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -317,7 +314,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Department")
@@ -341,7 +338,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("University")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -360,7 +357,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -378,12 +375,44 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Experiences");
+                });
+
+            modelBuilder.Entity("MyPortfolio.Core.Entities.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AboutId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AboutId")
+                        .IsUnique()
+                        .HasFilter("[AboutId] IS NOT NULL");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("MyPortfolio.Core.Entities.Skill", b =>
@@ -394,7 +423,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -403,7 +432,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("Value")
@@ -425,7 +454,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IconCode")
@@ -437,7 +466,7 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
@@ -461,11 +490,11 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("CvUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -476,10 +505,12 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("TopHeading")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("WelcomeAreas");
                 });
@@ -535,16 +566,37 @@ namespace MyPortfolio.Persistance.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyPortfolio.Core.Entities.Image", b =>
+                {
+                    b.HasOne("MyPortfolio.Core.Entities.About", "About")
+                        .WithOne("Image")
+                        .HasForeignKey("MyPortfolio.Core.Entities.Image", "AboutId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("About");
+                });
+
             modelBuilder.Entity("MyPortfolio.Core.Entities.SocialMediaAccount", b =>
                 {
                     b.HasOne("MyPortfolio.Core.Entities.About", null)
-                        .WithMany("SocialMediaAccount")
+                        .WithMany("SocialMediaAccounts")
                         .HasForeignKey("AboutId");
+                });
+
+            modelBuilder.Entity("MyPortfolio.Core.Entities.WelcomeArea", b =>
+                {
+                    b.HasOne("MyPortfolio.Core.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("MyPortfolio.Core.Entities.About", b =>
                 {
-                    b.Navigation("SocialMediaAccount");
+                    b.Navigation("Image");
+
+                    b.Navigation("SocialMediaAccounts");
                 });
 #pragma warning restore 612, 618
         }

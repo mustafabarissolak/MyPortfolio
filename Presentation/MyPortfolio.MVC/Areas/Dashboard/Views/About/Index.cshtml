@@ -1,0 +1,100 @@
+﻿@using MyPortfolio.Application.Features.Queries.AboutQueries.GetSingleAbout
+@model GetSingleAboutQueryResponse
+
+@{
+    ViewData["Title"] = "Hakkımda";
+}
+
+<div class="w-100">
+    <h5 class="text-center mb-4">Hakkımda</h5>
+
+    <div class="bg-secondary rounded p-4">
+
+        @if (Model.AboutDto is not null)
+        {
+            <table class="table table-hover align-middle w-100">
+                <thead>
+                    <tr>
+                        <th style="width:10%">Ad</th>
+                        <th style="width:10%">Alan</th>
+                        <th style="width:10%">Başlık</th>
+                        <th style="width:25%">Açıklama</th>
+                        <th style="width:8%">Tel</th>
+                        <th style="width:12%">Email</th>
+                        <th style="width:10%">Web</th>
+                        <th style="width:8%">Oluşturma</th>
+                        <th style="width:8%">Güncelleme</th>
+                        <th style="width:9%">İşlem</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>@Model.AboutDto.Name</td>
+                        <td>@Model.AboutDto.Field</td>
+                        <td>@Model.AboutDto.Title</td>
+
+                        <td class="text-break">
+                            @Model.AboutDto.Description
+                        </td>
+
+                        <td>@Model.AboutDto.PhoneNumber</td>
+
+                        <td class="text-break">
+                            @Model.AboutDto.Email
+                        </td>
+
+                        <td class="text-break">
+                            <a href="@Model.AboutDto.WebSite"
+                               target="_blank"
+                               class="text-decoration-none text-info">
+                                @Model.AboutDto.WebSite
+                            </a>
+                        </td>
+
+                        <td>@Model.AboutDto.CreateDate?.ToShortDateString()</td>
+                        <td>@Model.AboutDto.UpdateDate?.ToShortDateString()</td>
+
+                        <td class="text-center">
+                            <a asp-controller="About"
+                               asp-action="Edit"
+                               asp-route-id="@Model.AboutDto.Id"
+                               class="btn btn-outline-light btn-sm mb-1 w-100">
+                                Düzenle
+                            </a>
+
+                            <form asp-controller="About"
+                                  asp-action="Delete"
+                                  asp-route-id="@Model.AboutDto.Id"
+                                  method="post"
+                                  onsubmit="return confirm('Silmek istiyor musunuz?');">
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm w-100">
+                                    Sil
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @if (!string.IsNullOrEmpty(Model.AboutDto.ImagePath))
+            {
+                <div class="text-center mt-4">
+                    <img src="@Model.AboutDto.ImagePath"
+                         class="img-fluid rounded shadow"
+                         style="max-height:300px; object-fit:contain;" />
+                </div>
+            }
+        }
+        else
+        {
+            <a asp-controller="About"
+               asp-action="Create"
+               class="btn btn-outline-success">
+                <i class="bi bi-plus-circle"></i>
+            </a>
+        }
+
+    </div>
+</div>

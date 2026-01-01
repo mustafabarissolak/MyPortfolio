@@ -148,9 +148,6 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<string>("Field")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -383,6 +380,45 @@ namespace MyPortfolio.Persistance.Migrations
                     b.ToTable("Experiences");
                 });
 
+            modelBuilder.Entity("MyPortfolio.Core.Entities.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AboutId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WelcomeAreaId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AboutId")
+                        .IsUnique()
+                        .HasFilter("[AboutId] IS NOT NULL");
+
+                    b.HasIndex("WelcomeAreaId")
+                        .IsUnique()
+                        .HasFilter("[WelcomeAreaId] IS NOT NULL");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("MyPortfolio.Core.Entities.Skill", b =>
                 {
                     b.Property<string>("Id")
@@ -461,9 +497,6 @@ namespace MyPortfolio.Persistance.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -532,16 +565,40 @@ namespace MyPortfolio.Persistance.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyPortfolio.Core.Entities.Image", b =>
+                {
+                    b.HasOne("MyPortfolio.Core.Entities.About", "About")
+                        .WithOne("Image")
+                        .HasForeignKey("MyPortfolio.Core.Entities.Image", "AboutId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MyPortfolio.Core.Entities.WelcomeArea", "WelcomeArea")
+                        .WithOne("Image")
+                        .HasForeignKey("MyPortfolio.Core.Entities.Image", "WelcomeAreaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("About");
+
+                    b.Navigation("WelcomeArea");
+                });
+
             modelBuilder.Entity("MyPortfolio.Core.Entities.SocialMediaAccount", b =>
                 {
                     b.HasOne("MyPortfolio.Core.Entities.About", null)
-                        .WithMany("SocialMediaAccount")
+                        .WithMany("SocialMediaAccounts")
                         .HasForeignKey("AboutId");
                 });
 
             modelBuilder.Entity("MyPortfolio.Core.Entities.About", b =>
                 {
-                    b.Navigation("SocialMediaAccount");
+                    b.Navigation("Image");
+
+                    b.Navigation("SocialMediaAccounts");
+                });
+
+            modelBuilder.Entity("MyPortfolio.Core.Entities.WelcomeArea", b =>
+                {
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

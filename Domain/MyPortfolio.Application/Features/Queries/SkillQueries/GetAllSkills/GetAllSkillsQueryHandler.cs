@@ -19,6 +19,7 @@ public class GetAllSkillsQueryHandler : IRequestHandler<GetAllSkillsQueryRequest
         IQueryable<Skill> skills = _repository.GetAll();
         var dtoList = skills.Select(skill => new SkillDto
         {
+            Id = skill.Id,
             Name = skill.Name,
             Value = skill.Value,
             CreateDate = skill.CreatedDate,

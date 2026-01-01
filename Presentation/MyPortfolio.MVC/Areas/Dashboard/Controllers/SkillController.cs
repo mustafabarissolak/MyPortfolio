@@ -19,11 +19,7 @@ public class SkillController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(GetAllSkillsQueryRequest request)
-    {
-        var response = await _mediator.Send(request);
-        return View(response);
-    }
+    public async Task<IActionResult> Index(GetAllSkillsQueryRequest request) => View(await _mediator.Send(request));
 
     [HttpGet]
     public IActionResult Create() => View(new CreateSkillCommandRequest());
@@ -39,7 +35,7 @@ public class SkillController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Edit(GetByIdQueryRequest request)
+    public async Task<IActionResult> Edit(GetByIdSkillQueryRequest request)
     {
         var response = await _mediator.Send(request);
 
@@ -48,6 +44,7 @@ public class SkillController : Controller
 
         var model = new UpdateSkillCommandRequest
         {
+            Id = response.SkillDto.Id,
             Name = response.SkillDto.Name!,
             Value = response.SkillDto.Value
         };
@@ -57,6 +54,7 @@ public class SkillController : Controller
 
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(UpdateSkillCommandRequest request)
     {
         if (!ModelState.IsValid)
@@ -67,6 +65,7 @@ public class SkillController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(DeleteSkillCommandRequest request)
     {
         await _mediator.Send(request);

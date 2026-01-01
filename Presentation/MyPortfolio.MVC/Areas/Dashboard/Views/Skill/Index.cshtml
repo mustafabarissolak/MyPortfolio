@@ -9,34 +9,34 @@
 <a asp-controller="Skill"
    asp-action="Create"
    class="btn btn-outline-success">
-    <i class="bi bi-plus-circle"></i> 
+    <i class="bi bi-plus-circle"></i>
 </a>
-<div class="col-sm-12 col-xl-6">
+<div class="w-50 mx-auto">
     <h6 class="text-center">Beceriler</h6>
     <div class="bg-secondary rounded h-100 p-4">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col"></th>
+                    <th scope="col">#</th>
                     <th scope="col">Ad</th>
                     <th scope="col">%</th>
                     <th scope="col">Oluşturma Tarihi</th>
-                    <th scope="col">GHüncellenme Tarihi</th>
+                    <th scope="col">Güncellenme Tarihi</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            @if (Model is not null)
+            @if (Model.SkillDtos is not null && Model.SkillDtos.Any())
             {
-                @foreach (var skill in Model.SkillDtos!)
+                @foreach (var skill in Model.SkillDtos)
                 {
                     <tbody>
                         <tr>
                             <th scope="row">@sayac</th>
                             <td>@skill.Name</td>
                             <td>@skill.Value</td>
-                            <td>@skill.CreateDate</td>
-                            <td>@skill.UpdateDate</td>
+                            <td>@skill.CreateDate?.ToShortDateString()</td>
+                            <td>@skill.UpdateDate?.ToShortDateString()</td>
                             <td>
                                 <a asp-controller="Skill"
                                    asp-action="Edit"
@@ -46,7 +46,8 @@
                                 </a>
                             </td>
                             <td>
-                                <form asp-action="Delete"
+                                <form asp-controller="Skill"
+                                      asp-action="Delete"
                                       asp-route-id="@skill.Id"
                                       method="post"
                                       onsubmit="return confirm('Bu beceriyi silmek istiyor musunuz?');"
@@ -61,6 +62,7 @@
                     sayac++;
                 }
             }
+
         </table>
     </div>
 </div>

@@ -18,5 +18,5 @@ public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
 
     public IQueryable<T> GetAll() => Table.AsQueryable();
 
-    public async Task<T> GetByIdAsync(string id) => await (Table.AsQueryable()).FirstOrDefaultAsync(e => e.Id == id);
+    public virtual async Task<T> GetByIdAsync(string id) => (await (Table.AsQueryable()).FirstOrDefaultAsync(e => e.Id == id))!;
 }
