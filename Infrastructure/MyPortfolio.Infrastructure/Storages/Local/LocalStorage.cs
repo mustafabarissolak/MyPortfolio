@@ -17,13 +17,13 @@ public class LocalStorage : Storage, ILocalStorage
         if (string.IsNullOrEmpty(filePath))
             return;
 
-        // bşataki / karakterini kaldırır çünkü (wwwroot) yok sayılır
+        // baştaki / karakterini kaldırır çünkü (wwwroot) yok sayılır
         filePath = filePath.TrimStart('/');
 
         // / karakterlerini işletim sistemine uygun dizin ayırıcıya çevirir
         filePath = filePath.Replace("/", Path.DirectorySeparatorChar.ToString());
 
-        // wwwroot\uploads\about-image\xxx.jpg
+        // wwwroot\uploads\{folderName}\{file.xxx}
         string fullPath = Path.Combine(_env.WebRootPath, filePath);
 
         if (File.Exists(fullPath))
@@ -32,8 +32,8 @@ public class LocalStorage : Storage, ILocalStorage
 
     public async Task<string> UploadAsync(string folderPath, IFormFile image)
     {
-        // wwwroot/uploads
-        var dir = Path.Combine(_env.WebRootPath, "uploads", folderPath);
+        // wwwroot/
+        var dir = Path.Combine(_env.WebRootPath, folderPath);
 
         if (!Directory.Exists(dir))
             Directory.CreateDirectory(dir);
@@ -42,7 +42,7 @@ public class LocalStorage : Storage, ILocalStorage
         var ext = Path.GetExtension(image.FileName); // ".jpg"
 
         var fileName = name + ext; // "imageName.jpg"
-        var path = Path.Combine(dir, fileName); // wwwroot/uploads/{folderPath}/{fileName}
+        var path = Path.Combine(dir, fileName); // wwwroot/{folderPath}/{fileName}
 
         byte i = 1;
         while(File.Exists(path))
@@ -55,6 +55,6 @@ public class LocalStorage : Storage, ILocalStorage
         await using var stream = new FileStream(path, FileMode.Create);
         await image.CopyToAsync(stream);
 
-        return $"/uploads/{folderPath}/{fileName}";
+        return $"/{folderPath}/{fileName}";
     }
 }

@@ -18,7 +18,7 @@ public class CreateAboutCommandHandler : IRequestHandler<CreateAboutCommandReque
     public async Task<CreateAboutCommandResponse> Handle(CreateAboutCommandRequest request, CancellationToken cancellationToken)
     {
         if (request.File != null && request.File.Length > 0)
-            request.ImagePath = await _storageService.UploadAsync("about-image", request.File);
+            request.ImagePath = await _storageService.UploadAsync("uploads/about", request.File);
 
         await _repository.AddAsync(new()
         {

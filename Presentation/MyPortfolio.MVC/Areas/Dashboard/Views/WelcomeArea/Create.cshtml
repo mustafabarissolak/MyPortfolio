@@ -1,0 +1,39 @@
+﻿@using MyPortfolio.Application.Features.Commands.WelcomeAreaCommands.CreateWelcomeArea
+@model CreateWelcomeAreaCommandRequest
+
+@{
+    ViewData["Title"] = "Karşılama Alanı Ekle";
+}
+
+<div class="col-12">
+    <div class="bg-secondary rounded p-4">
+        <h6 class="mb-4">Karşılama Alanı Ekle</h6>
+
+        <form asp-area="Dashboard" asp-controller="WelcomeArea" asp-action="Create" enctype="multipart/form-data" method="post">
+
+            <div class="form-floating mb-3">
+                <input asp-for="TopHeading" class="form-control" />
+                <label asp-for="TopHeading">Üst Başlık</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="SubHeading" class="form-control" />
+                <label asp-for="SubHeading">Alt Başlık</label>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImagePath" class="form-label">Görsel Yükle: </label>
+                <input asp-for="ImagePath" name="file" class="form-control bg-dark" type="file" id="formFile">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CvUrl" class="form-label">CV Yükle: </label>
+                <input asp-for="CvUrl" name="cv" class="form-control bg-dark" type="file" id="formFile">
+            </div>
+
+            <button type="submit" class="btn btn-outline-success m-2">Kaydet</button>
+            <a asp-action="Index" class="btn btn-outline-light m-2">Geri Dön</a>
+
+        </form>
+    </div>
+</div>
+

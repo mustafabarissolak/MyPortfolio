@@ -19,7 +19,7 @@ public class AboutController : Controller
         _mediator = mediator;
     }
 
-    public async Task<IActionResult> Index(GetSingleAboutQueryRequest request) => View(await _mediator.Send(request));
+    public async Task<IActionResult> Index() => View(await _mediator.Send(new GetSingleAboutQueryRequest()));
 
     public IActionResult Create() => View(new CreateAboutCommandRequest());
 

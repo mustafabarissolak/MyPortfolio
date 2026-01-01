@@ -1,14 +1,24 @@
-﻿<section id="welcome-hero" class="welcome-hero">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="header-text">
-                    <h2>hi <span>,</span> i am <br> browny <br> star <span>.</span>   </h2>
-                    <p>ui/ux designer and web developer</p>
-                    <a href="assets/download/browney.txt" download>download resume</a>
-                </div><!--/.header-text-->
-            </div><!--/.col-->
-        </div><!-- /.row-->
-    </div><!-- /.container-->
+﻿@using MyPortfolio.Application.Features.Queries.WelcomeAreaQueries.GetSingleWelcomeArea
+@model GetSingleWelcomeAreaQueryResponse
 
-</section><!--/.welcome-hero-->
+@if (Model.WelcomeAreaDto is not null)
+{
+    <section id="welcome-hero" class="welcome-hero" style="background-image:url('@Model.WelcomeAreaDto.ImagePath');">
+
+        <div class="welcome-overlay"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="header-text">
+                        <h2>@Model.WelcomeAreaDto.TopHeading</h2>
+                        <p>@Model.WelcomeAreaDto.SubHeading</p>
+                        <a href="@Model.WelcomeAreaDto.CvUrl" download>
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

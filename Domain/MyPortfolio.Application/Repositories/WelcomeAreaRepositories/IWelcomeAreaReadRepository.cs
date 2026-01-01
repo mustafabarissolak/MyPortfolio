@@ -2,4 +2,7 @@
 
 namespace MyPortfolio.Application.Repositories.WelcomeAreaRepositories;
 
-public interface IWelcomeAreaReadRepository : IReadRepository<WelcomeArea> { }
+public interface IWelcomeAreaReadRepository : IReadRepository<WelcomeArea>
+{
+    Task<WelcomeArea> GetSingleAsync();
+}

@@ -33,7 +33,7 @@ public class UpdateAboutCommandHandler : IRequestHandler<UpdateAboutCommandReque
 
         if (request.File != null && request.File.Length > 0)
         {
-            var newImagePath = await _storageService.UploadAsync("about-image", request.File);
+            var newImagePath = await _storageService.UploadAsync("uploads/about", request.File);
 
             if (about.Image != null && !string.IsNullOrEmpty(about.Image.ImagePath))
                 await _storageService.DeleteAsync(about.Image.ImagePath);

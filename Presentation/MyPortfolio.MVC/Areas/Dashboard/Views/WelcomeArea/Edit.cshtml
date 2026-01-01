@@ -1,0 +1,51 @@
+﻿@using MyPortfolio.Application.Features.Commands.WelcomeAreaCommands.UpdateWelcomeArea
+@model UpdateWelcomeAreaCommandRequest
+
+@{
+    ViewData["Title"] = "Karşılama Alanı Düzenle";
+}
+
+<div class="col-12">
+    <div class="bg-secondary rounded p-4">
+        <h6 class="mb-4">Karşılama Alanı Düzenle</h6>
+
+        <form asp-area="Dashboard" asp-controller="WelcomeArea" asp-action="Edit" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImagePath" />
+            <input type="hidden" asp-for="CvUrl" />
+
+            <div class="form-floating mb-3">
+                <input asp-for="TopHeading" class="form-control" />
+                <label asp-for="TopHeading">Üst Başlık</label>
+                <span asp-validation-for="TopHeading" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="SubHeading" class="form-control" />
+                <label asp-for="SubHeading">Alt Başlık</label>
+                <span asp-validation-for="SubHeading" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label">Görsel Yükle</label>
+                <input type="file"
+                       name="file"
+                       class="form-control bg-dark"
+                       accept="image/*" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CV Yükle</label>
+                <input type="file"
+                       name="cv"
+                       class="form-control bg-dark"
+                       accept="image/*" />
+            </div>
+
+            <button type="submit" class="btn btn-outline-success m-2">Kaydet</button>
+            <a asp-action="Index" class="btn btn-outline-light m-2">Geri Dön</a>
+
+        </form>
+    </div>
+</div>
+
