@@ -24,6 +24,7 @@ public class GetByIdWelcomeAreaQueryHandler : IRequestHandler<GetByIdWelcomeArea
         {
             WelcomeAreaDto = new()
             {
+                Id = welcomeArea.Id,
                 TopHeading = welcomeArea.TopHeading,
                 SubHeading = welcomeArea.SubHeading,
                 CvUrl = welcomeArea.CvUrl,

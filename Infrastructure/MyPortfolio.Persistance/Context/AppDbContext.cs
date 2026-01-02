@@ -9,6 +9,7 @@ public class AppDbContext : IdentityDbContext<AppUser, AppRole, string>
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     public DbSet<About> Abouts { get; set; }
     public DbSet<Contact> Contacts { get; set; }
+    public DbSet<ContactInfo> ContactInfos { get; set; }
     public DbSet<Education> Educations { get; set; }
     public DbSet<Experience> Experiences { get; set; }
     public DbSet<Skill> Skills { get; set; }

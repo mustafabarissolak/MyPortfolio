@@ -1,0 +1,3 @@
+﻿namespace MyPortfolio.Application.Features.Commands.SocialMediaAccountCommands.UpdateSocialMediaAccount;
+
+public class UpdateSocialMediaAccountCommandResponse { }

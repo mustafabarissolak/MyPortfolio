@@ -1,0 +1,56 @@
+﻿@using MyPortfolio.Application.Features.Commands.ContactInfoCommands.CreateContactInfo
+@model CreateContactInfoCommandRequest
+
+@{
+    ViewData["Title"] = "İletişim Bilgileri Ekle";
+}
+
+<div class="col-12">
+    <div class="bg-secondary rounded p-4">
+        <h6 class="mb-4">İletişim Bilgileri Ekle</h6>
+
+        <form asp-action="Create" method="post">
+
+            <div class="form-floating mb-3">
+                <input asp-for="FullName" class="form-control" />
+                <label asp-for="FullName">Ad-Soyad</label>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Job" class="form-control" />
+                <label asp-for="Job">Meslek</label>
+                <span asp-validation-for="Job" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email">E-Mail</label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="PhoneNumber" class="form-control" />
+                <label asp-for="PhoneNumber">Telefon Numarası</label>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Location" class="form-control" />
+                <label asp-for="Location">İkamet</label>
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="WebSite" class="form-control" />
+                <label asp-for="WebSite">Web Site</label>
+                <span asp-validation-for="WebSite" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-outline-success m-2">Kaydet</button>
+            <a asp-action="Index" class="btn btn-outline-light m-2">Geri Dön</a>
+
+        </form>
+    </div>
+</div>
+

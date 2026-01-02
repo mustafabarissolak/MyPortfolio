@@ -22,16 +22,13 @@ public class GetSingleAboutQueryHandler : IRequestHandler<GetSingleAboutQueryReq
 
         return new()
         {
-            AboutDto = new AboutDto
+            AboutDto = new()
             {
                 Id = about.Id,
                 Name = about.Name,
                 Field = about.Field,
                 Title = about.Title,
                 Description = about.Description,
-                PhoneNumber = about.PhoneNumber,
-                Email = about.Email,
-                WebSite = about.WebSite,
                 CreateDate = about.CreatedDate,
                 UpdateDate = about.UpdatedDate,
                 ImagePath = about.Image?.ImagePath,

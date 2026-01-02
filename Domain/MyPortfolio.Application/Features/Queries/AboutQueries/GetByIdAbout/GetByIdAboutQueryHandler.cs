@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MyPortfolio.Application.DTOs;
 using MyPortfolio.Application.Repositories.AboutRepositories;
 using MyPortfolio.Core.Entities;
 
@@ -26,9 +25,6 @@ public class GetByIdAboutQueryHandler : IRequestHandler<GetByIdAboutQueryRequest
                 Field = about.Field,
                 Title = about.Title,
                 Description = about.Description,
-                PhoneNumber = about.PhoneNumber,
-                Email = about.Email,
-                WebSite = about.WebSite,
                 ImagePath = about.Image?.ImagePath
             }
         };

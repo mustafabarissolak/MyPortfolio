@@ -1,7 +1,10 @@
-﻿namespace MyPortfolio.MVC.Models;
+﻿using MyPortfolio.Application.DTOs;
+
+namespace MyPortfolio.MVC.Models;
 
 public class AboutViewModel
 {
-    public AboutModel? AboutVM { get; set; }
-    public List<SocialMediaAccountModel>? SocialMediaAccountsVM { get; set; }
+    public AboutDto? AboutModel { get; set; }
+    public List<SocialMediaAccountDto>? SocialMediaAccountModels { get; set; }
+    public ContactInfoDto? ContactInfoDtoModel { get; set; }
 }

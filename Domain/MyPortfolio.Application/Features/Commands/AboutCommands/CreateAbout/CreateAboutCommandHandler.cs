@@ -26,9 +26,6 @@ public class CreateAboutCommandHandler : IRequestHandler<CreateAboutCommandReque
             Field = request.Field,
             Title = request.Title,
             Description = request.Description,
-            PhoneNumber = request.PhoneNumber,
-            Email = request.Email,
-            WebSite = request.WebSite,
             Image = new() { ImagePath = request.ImagePath }
         });
 

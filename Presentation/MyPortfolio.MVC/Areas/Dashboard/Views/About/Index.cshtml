@@ -19,9 +19,6 @@
                         <th style="width:10%">Alan</th>
                         <th style="width:10%">Başlık</th>
                         <th style="width:25%">Açıklama</th>
-                        <th style="width:8%">Tel</th>
-                        <th style="width:12%">Email</th>
-                        <th style="width:10%">Web</th>
                         <th style="width:8%">Oluşturma</th>
                         <th style="width:8%">Güncelleme</th>
                         <th style="width:9%">İşlem</th>
@@ -36,20 +33,6 @@
 
                         <td class="text-break">
                             @Model.AboutDto.Description
-                        </td>
-
-                        <td>@Model.AboutDto.PhoneNumber</td>
-
-                        <td class="text-break">
-                            @Model.AboutDto.Email
-                        </td>
-
-                        <td class="text-break">
-                            <a href="@Model.AboutDto.WebSite"
-                               target="_blank"
-                               class="text-decoration-none text-info">
-                                @Model.AboutDto.WebSite
-                            </a>
                         </td>
 
                         <td>@Model.AboutDto.CreateDate?.ToShortDateString()</td>

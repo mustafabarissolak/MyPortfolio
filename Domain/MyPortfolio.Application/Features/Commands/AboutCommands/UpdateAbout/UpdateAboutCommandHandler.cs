@@ -26,9 +26,6 @@ public class UpdateAboutCommandHandler : IRequestHandler<UpdateAboutCommandReque
         about.Field = request.Field;
         about.Title = request.Title;
         about.Description = request.Description;
-        about.PhoneNumber = request.PhoneNumber;
-        about.Email = request.Email;
-        about.WebSite = request.WebSite;
         about.UpdatedDate = DateTime.Now;
 
         if (request.File != null && request.File.Length > 0)

@@ -32,5 +32,21 @@
             opacity: 1;
         }
 
+        .text-clamp {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            line-height: 1.6;
+            max-height: calc(1.6em * 4);
+            padding: 2px 0;
+        }
+
+            .text-clamp:hover {
+                -webkit-line-clamp: unset;
+                max-height: none;
+            }
+
+
     </style>
 </head>

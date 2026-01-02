@@ -1,0 +1,77 @@
+﻿@using MyPortfolio.Application.Features.Queries.SocialMediaAccountQueries.GetAllSocialMediaAccount
+@model GetAllSocialMediaAccountQueryResponse
+
+@{
+    ViewData["Title"] = "Sosyal Medya Hesapları";
+    byte sayac = 1;
+}
+
+<a asp-controller="SocialMediaAccount"
+   asp-action="Create"
+   class="btn btn-outline-success">
+    <i class="bi bi-plus-circle"></i>
+</a>
+<div class="w-75 mx-auto">
+    <h6 class="text-center">Beceriler</h6>
+    <div class="bg-secondary rounded h-100 p-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ad</th>
+                    <th scope="col">Url</th>
+                    <th scope="col">İkonKodu</th>
+                    <th scope="col">Oluşturma Tarihi</th>
+                    <th scope="col">Güncellenme Tarihi</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @if (Model.SocialMediaAccountDto is not null && Model.SocialMediaAccountDto.Any())
+            {
+                @foreach (var item in Model.SocialMediaAccountDto)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@sayac</th>
+                            <td>@item.Name</td>
+                            <td>@item.Url</td>
+                            <td>@item.IconCode</td>
+                            <td>@item.CreateDate?.ToShortDateString()</td>
+                            <td>@item.UpdateDate?.ToShortDateString()</td>
+                            <td>
+                                <a asp-controller="SocialMediaAccount"
+                                   asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-outline-light m-2">
+                                    Düzenle
+                                </a>
+                            </td>
+                            <td>
+                                <form asp-controller="SocialMediaAccount"
+                                      asp-action="Delete"
+                                      asp-route-id="@item.Id"
+                                      method="post"
+                                      onsubmit="return confirm('Bu beceriyi silmek istiyor musunuz?');"
+                                      style="display:inline">
+                                    <button type="submit" class="btn btn-outline-danger m-2">
+                                        Sil
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                    sayac++;
+                }
+            }
+        </table>
+    </div>
+</div>
+
+            CompanyName = experience.CompanyName,
+            Description = experience.Description,
+            Location = experience.Location,
+            EndDate = experience.EndDate,
+            StartDate = experience.StartDate,
+            CreateDate = experience.CreatedDate,
+            UpdateDate = experience.UpdatedDate, 

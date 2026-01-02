@@ -1,0 +1,72 @@
+﻿@using MyPortfolio.Application.Features.Queries.ExperienceQueries.GetAllExperience
+@model GetAllExperienceQueryResponse
+@{
+    ViewData["Title"] = "Deneyimler";
+    byte sayac = 1;
+}
+
+<a asp-controller="Experience"
+   asp-action="Create"
+   class="btn btn-outline-success">
+    <i class="bi bi-plus-circle"></i>
+</a>
+<div class="w-100 mx-auto">
+    <h6 class="text-center">Deneyimler</h6>
+    <div class="bg-secondary rounded h-100 p-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Şirket</th>
+                    <th scope="col">Konum</th>
+                    <th scope="col">Açıklama</th>
+                    <th scope="col">Başlangıç Tarihi</th>
+                    <th scope="col">Bitiş Tarihi</th>
+                    <th scope="col">Oluşturma Tarihi</th>
+                    <th scope="col">Güncellenme Tarihi</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @if (Model.ExperienceDtoList is not null && Model.ExperienceDtoList.Any())
+            {
+                @foreach (var item in Model.ExperienceDtoList)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@sayac</th>
+                            <td>@item.CompanyName</td>
+                            <td>@item.Location</td>
+                            <td class="text-clamp">@item.Description</td>
+                            <td>@item.StartDate</td>
+                            <td>@item.EndDate</td>
+                            <td>@item.CreateDate?.ToShortDateString()</td>
+                            <td>@item.UpdateDate?.ToShortDateString()</td>
+                            <td>
+                                <a asp-controller="Experience"
+                                   asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-outline-light m-2">
+                                    Düzenle
+                                </a>
+                            </td>
+                            <td>
+                                <form asp-controller="Experience"
+                                      asp-action="Delete"
+                                      asp-route-id="@item.Id"
+                                      method="post"
+                                      onsubmit="return confirm('Bu beceriyi silmek istiyor musunuz?');"
+                                      style="display:inline">
+                                    <button type="submit" class="btn btn-outline-danger m-2">
+                                        Sil
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                    sayac++;
+                }
+            }
+        </table>
+    </div>
+</div>

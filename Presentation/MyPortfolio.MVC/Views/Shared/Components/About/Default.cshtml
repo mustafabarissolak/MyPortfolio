@@ -1,92 +1,77 @@
 ﻿@model AboutViewModel
 
-@if (Model?.AboutVM != null)
-{
-    <section id="about" class="about">
-        <div class="section-heading text-center">
-            <h2>hakkımda</h2>
-        </div>
 
-        <div class="container">
-            <div class="about-content">
-                <div class="row">
+<section id="about" class="about">
+    <div class="section-heading text-center">
+        <h2>hakkımda</h2>
+    </div>
 
-                    <!-- LEFT -->
+    <div class="container">
+        <div class="about-content">
+            <div class="row">
+                @if (Model?.AboutModel != null)
+                {
                     <div class="col-sm-6">
                         <div class="single-about-txt">
 
-                            @* TITLE / FIELD *@
-                            @if (!string.IsNullOrWhiteSpace(Model.AboutVM.Title))
+                            @if (!string.IsNullOrWhiteSpace(Model.AboutModel.Title))
                             {
-                                <h3>@Model.AboutVM.Title</h3>
+                                <h3>@Model.AboutModel.Title</h3>
                             }
-
-                            @* DESCRIPTION *@
-                            @if (!string.IsNullOrWhiteSpace(Model.AboutVM.Description))
+                            @if (!string.IsNullOrWhiteSpace(Model.AboutModel.Description))
                             {
-                                <p>@Model.AboutVM.Description</p>
+                                <p>@Model.AboutModel.Description</p>
                             }
-
                             <div class="row">
-
-                                @* PHONE *@
-                                @if (!string.IsNullOrWhiteSpace(Model.AboutVM.PhoneNumber))
+                                @if (Model?.ContactInfoDtoModel != null)
                                 {
-                                    <div class="col-sm-4">
-                                        <div class="single-about-add-info">
-                                            <h3>phone</h3>
-                                            <p>@Model.AboutVM.PhoneNumber</p>
+                                    @if (!string.IsNullOrWhiteSpace(Model.ContactInfoDtoModel.PhoneNumber))
+                                    {
+                                        <div class="col-sm-4">
+                                            <div class="single-about-add-info">
+                                                <h3>phone</h3>
+                                                <p>@Model.ContactInfoDtoModel.PhoneNumber</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-
-                                @* EMAIL *@
-                                @if (!string.IsNullOrWhiteSpace(Model.AboutVM.Email))
-                                {
-                                    <div class="col-sm-4">
-                                        <div class="single-about-add-info">
-                                            <h3>email</h3>
-                                            <p>
-                                                <a href="mailto:@Model.AboutVM.Email">
-                                                    @Model.AboutVM.Email
-                                                </a>
-                                            </p>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(Model.ContactInfoDtoModel.Email))
+                                    {
+                                        <div class="col-sm-4">
+                                            <div class="single-about-add-info">
+                                                <h3>email</h3>
+                                                <p>
+                                                    <a href="mailto:@Model.ContactInfoDtoModel.Email">
+                                                        @Model.ContactInfoDtoModel.Email
+                                                    </a>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-
-                                @* WEBSITE *@
-                                @if (!string.IsNullOrWhiteSpace(Model.AboutVM.WebSite))
-                                {
-                                    <div class="col-sm-4">
-                                        <div class="single-about-add-info">
-                                            <h3>website</h3>
-                                            <p>
-                                                <a href="@Model.AboutVM.WebSite" target="_blank">
-                                                    @Model.AboutVM.WebSite
-                                                </a>
-                                            </p>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(Model.ContactInfoDtoModel.WebSite))
+                                    {
+                                        <div class="col-sm-4">
+                                            <div class="single-about-add-info">
+                                                <h3>website</h3>
+                                                <p>
+                                                    <a href="@Model.ContactInfoDtoModel.WebSite" target="_blank">
+                                                        @Model.ContactInfoDtoModel.WebSite
+                                                    </a>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
                                 }
-
                             </div>
                         </div>
                     </div>
-
-                    <!-- RIGHT -->
                     <div class="col-sm-offset-1 col-sm-5">
                         <div class="single-about-img">
-
-                            @* PROFILE IMAGE *@
-                            <img src="@Model.AboutVM.ImagePath" alt="profile_image" />
-
-                            @* SOCIAL MEDIA *@
-                            @if (Model.SocialMediaAccountsVM?.Any() == true)
+                            <img src="@Model!.AboutModel.ImagePath" alt="profile_image" />
+                            @if (Model.SocialMediaAccountModels?.Any() == true)
                             {
                                 <div class="about-list-icon">
                                     <ul>
-                                        @foreach (var item in Model.SocialMediaAccountsVM)
+                                        @foreach (var item in Model.SocialMediaAccountModels)
                                         {
                                             if (!string.IsNullOrWhiteSpace(item.Url) &&
                                             !string.IsNullOrWhiteSpace(item.IconCode))
@@ -96,17 +81,16 @@
                                                         <i class="@item.IconCode" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
+
                                             }
                                         }
                                     </ul>
                                 </div>
                             }
-
                         </div>
                     </div>
-
-                </div>
+                }
             </div>
         </div>
-    </section>
-}
+    </div>
+</section>

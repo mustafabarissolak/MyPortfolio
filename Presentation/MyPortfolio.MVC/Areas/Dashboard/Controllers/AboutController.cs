@@ -50,9 +50,6 @@ public class AboutController : Controller
             Field = response.AboutDto.Field,
             Title = response.AboutDto.Title,
             Description = response.AboutDto.Description,
-            PhoneNumber = response.AboutDto.PhoneNumber,
-            Email = response.AboutDto.Email,
-            WebSite = response.AboutDto.WebSite,
             ImagePath = response.AboutDto.ImagePath
         };
 

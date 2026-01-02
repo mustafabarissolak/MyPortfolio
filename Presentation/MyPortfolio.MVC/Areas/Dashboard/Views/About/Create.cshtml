@@ -30,27 +30,11 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description"
+                          class="form-control"
+                          style="height: 150px"></textarea>
                 <label asp-for="Description">Açıklama</label>
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="PhoneNumber" class="form-control" />
-                <label asp-for="PhoneNumber">Tel No</label>
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Email" type="email" class="form-control" />
-                <label asp-for="Email">Email</label>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="WebSite" class="form-control" />
-                <label asp-for="WebSite">Web Site Url</label>
-                <span asp-validation-for="WebSite" class="text-danger"></span>
             </div>
 
             <div class="mb-3">

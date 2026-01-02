@@ -13,21 +13,21 @@
                 <span>Admin</span>
             </div>
         </div>
-@*         <div class="navbar-nav w-100">
-            <a asp-area="Dashboard" asp-controller="Home" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a asp-area="Dashboard" asp-controller="Skill" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Beceriler</a>
-            <a asp-area="Dashboard" asp-controller="About" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Hakkımda</a>
-            <a asp-area="Dashboard" asp-controller="Contact" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Beceriler</a>
-            <a asp-area="Dashboard" asp-controller="WelcomeArea" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Beceriler</a>
-            <a asp-area="Dashboard" asp-controller="SocialMediaAccount" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Beceriler</a>
-            <a asp-area="Dashboard" asp-controller="Experience" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Beceriler</a>
-            <a asp-area="Dashboard" asp-controller="Education" asp-action="Index" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Beceriler</a>
-        </div> *@
         <div class="navbar-nav w-100">
 
             <a asp-area="Dashboard" asp-controller="Home" asp-action="Index"
                class="nav-item nav-link">
                 <i class="fa fa-home me-2"></i>Dashboard
+            </a>
+
+            <a asp-area="Dashboard" asp-controller="Experience" asp-action="Index"
+               class="nav-item nav-link">
+                <i class="fa fa-briefcase me-2"></i>Deneyim
+            </a>
+
+            <a asp-area="Dashboard" asp-controller="Education" asp-action="Index"
+               class="nav-item nav-link">
+                <i class="fa fa-graduation-cap me-2"></i>Eğitim
             </a>
 
             <a asp-area="Dashboard" asp-controller="Skill" asp-action="Index"
@@ -40,11 +40,6 @@
                 <i class="fa fa-user me-2"></i>Hakkımda
             </a>
 
-            <a asp-area="Dashboard" asp-controller="Contact" asp-action="Index"
-               class="nav-item nav-link">
-                <i class="fa fa-envelope me-2"></i>İletişim
-            </a>
-
             <a asp-area="Dashboard" asp-controller="WelcomeArea" asp-action="Index"
                class="nav-item nav-link">
                 <i class="fa fa-image me-2"></i>Karşılama Alanı
@@ -55,14 +50,9 @@
                 <i class="fa fa-link me-2"></i>Sosyal Medya
             </a>
 
-            <a asp-area="Dashboard" asp-controller="Experience" asp-action="Index"
+            <a asp-area="Dashboard" asp-controller="Contact" asp-action="Index"
                class="nav-item nav-link">
-                <i class="fa fa-briefcase me-2"></i>Deneyim
-            </a>
-
-            <a asp-area="Dashboard" asp-controller="Education" asp-action="Index"
-               class="nav-item nav-link">
-                <i class="fa fa-graduation-cap me-2"></i>Eğitim
+                <i class="fa fa-envelope me-2"></i>Gelen Mesajlar
             </a>
 
         </div>

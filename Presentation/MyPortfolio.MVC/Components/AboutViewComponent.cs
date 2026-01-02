@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MyPortfolio.Application.DTOs;
 using MyPortfolio.Application.Features.Queries.AboutQueries.GetSingleAbout;
+using MyPortfolio.Application.Features.Queries.ContactInfoQueries.GetSingleContactInfo;
+using MyPortfolio.Application.Features.Queries.SocialMediaAccountQueries.GetAllSocialMediaAccount;
 using MyPortfolio.MVC.Models;
 
 namespace MyPortfolio.MVC.Components;
@@ -17,31 +20,35 @@ public class AboutViewComponent : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var responseAbout = await _mediator.Send(new GetSingleAboutQueryRequest());
-        //var responseSocialMediaAccount = await _mediator.Send(new GetSocialMediaAccountQueryRequest());
-
-        if (responseAbout?.AboutDto is null)
-            return View(new AboutViewModel());
+        var responseContactInfo = await _mediator.Send(new GetSingleContactInfoQueryRequest());
+        var responseSocialMediaAccount = await _mediator.Send(new GetAllSocialMediaAccountQueryRequest());
 
         var model = new AboutViewModel
         {
-            AboutVM = new AboutModel
+            AboutModel = new()
             {
-                Name = responseAbout.AboutDto.Name,
+                Name = responseAbout.AboutDto!.Name,
                 Field = responseAbout.AboutDto.Field,
                 Title = responseAbout.AboutDto.Title,
                 Description = responseAbout.AboutDto.Description,
-                PhoneNumber = responseAbout.AboutDto.PhoneNumber,
-                Email = responseAbout.AboutDto.Email,
-                WebSite = responseAbout.AboutDto.WebSite,
                 ImagePath = responseAbout.AboutDto.ImagePath
             },
-            SocialMediaAccountsVM = new()
-            //SocialMediaAccountsVM = new SocialMediaAccountModel
-            //{
-            //    Name = responseSocialMediaAccount.responseSocialMediaAccountDto.Name,
-            //    Url = responseSocialMediaAccount.responseSocialMediaAccountDto.Url,
-            //    IconCode = responseSocialMediaAccount.responseSocialMediaAccountDto.IconCode
-            //}.ToList()
+            ContactInfoDtoModel = new()
+            {
+                FullName = responseContactInfo.ContactInfoDto!.FullName,
+                Job = responseContactInfo.ContactInfoDto.Job,
+                Email = responseContactInfo.ContactInfoDto.Email,
+                Location = responseContactInfo.ContactInfoDto.Location,
+                WebSite = responseContactInfo.ContactInfoDto.WebSite,
+                PhoneNumber = responseContactInfo.ContactInfoDto.PhoneNumber
+            }
+            ,
+            SocialMediaAccountModels = responseSocialMediaAccount.SocialMediaAccountDto?.Select(socialMediaAccount => new SocialMediaAccountDto()
+            {
+                Name = socialMediaAccount.Name,
+                IconCode = socialMediaAccount.IconCode,
+                Url = socialMediaAccount.Url,
+            }).ToList()
         };
 
         return View(model);

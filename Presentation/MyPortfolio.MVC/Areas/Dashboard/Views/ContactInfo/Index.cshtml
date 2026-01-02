@@ -1,0 +1,71 @@
+﻿@using MyPortfolio.Application.Features.Queries.ContactInfoQueries.GetSingleContactInfo
+@model GetSingleContactInfoQueryResponse
+
+@{
+    ViewData["Title"] = "İletişim Bilgileri";
+}
+
+<div class="w-100">
+    <h5 class="text-center mb-4">İletişim Bilgileri</h5>
+
+    <div class="bg-secondary rounded p-4">
+
+        @if (Model.ContactInfoDto is not null)
+        {
+            <table class="table table-hover align-middle w-100">
+                <thead>
+                    <tr>
+                        <th style="width:15%">Ad-Soyad</th>
+                        <th style="width:15%">Meslek</th>
+                        <th style="width:15%">E-Mail</th>
+                        <th style="width:15%">Telefon No</th>
+                        <th style="width:15%">İkamet</th>
+                        <th style="width:15%">Web Site</th>
+                        <th style="width:10%">İşlem</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>@Model.ContactInfoDto.FullName</td>
+                        <td>@Model.ContactInfoDto.Job</td>
+                        <td>@Model.ContactInfoDto.Email</td>
+                        <td>@Model.ContactInfoDto.PhoneNumber</td>
+                        <td>@Model.ContactInfoDto.Location</td>
+                        <td>@Model.ContactInfoDto.WebSite</td>
+
+                        <td class="text-center">
+                            <a asp-controller="ContactInfo"
+                               asp-action="Edit"
+                               asp-route-id="@Model.ContactInfoDto.Id"
+                               class="btn btn-outline-light btn-sm mb-1 w-100">
+                                Düzenle
+                            </a>
+
+                            <form asp-controller="ContactInfo"
+                                  asp-action="Delete"
+                                  asp-route-id="@Model.ContactInfoDto.Id"
+                                  method="post"
+                                  onsubmit="return confirm('Silmek istiyor musunuz?');">
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm w-100">
+                                    Sil
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <a asp-controller="ContactInfo"
+               asp-action="Create"
+               class="btn btn-outline-success">
+                <i class="bi bi-plus-circle"></i>
+            </a>
+        }
+
+    </div>
+</div>

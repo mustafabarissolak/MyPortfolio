@@ -23,10 +23,11 @@ public class GetByIdSkillQueryHandler : IRequestHandler<GetByIdSkillQueryRequest
 
         SkillDto dto = new()
         {
+            Id = skill.Id,
             Name = skill.Name,
             Value = skill.Value,
             CreateDate = skill.CreatedDate,
-            UpdateDate = skill.UpdatedDate
+            UpdateDate = skill.UpdatedDate,
         };
 
         return new()
@@ -34,5 +35,4 @@ public class GetByIdSkillQueryHandler : IRequestHandler<GetByIdSkillQueryRequest
             SkillDto = dto
         };
     }
-
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyPortfolio.Application.Repositories.AboutRepositories;
+using MyPortfolio.Application.Repositories.ContactInfoRepositories;
 using MyPortfolio.Application.Repositories.ContactRepositories;
 using MyPortfolio.Application.Repositories.EducationRepositories;
 using MyPortfolio.Application.Repositories.ExperienceRepositories;
@@ -13,6 +14,7 @@ using MyPortfolio.Application.Repositories.WelcomeAreaRepositories;
 using MyPortfolio.Core.Entities;
 using MyPortfolio.Persistance.Context;
 using MyPortfolio.Persistance.Repositories.AboutRepositories;
+using MyPortfolio.Persistance.Repositories.ContactInfoRepositories;
 using MyPortfolio.Persistance.Repositories.ContactRepositories;
 using MyPortfolio.Persistance.Repositories.EducationRepositories;
 using MyPortfolio.Persistance.Repositories.ExperienceRepositories;
@@ -63,6 +65,9 @@ public static class ServiceRegistration
 
         services.AddScoped<IContactReadRepository, ContactReadRepository>();
         services.AddScoped<IContactWriteRepository, ContactWriteRepository>();
+
+        services.AddScoped<IContactInfoReadRepository, ContactInfoReadRepository>();
+        services.AddScoped<IContactInfoWriteRepository, ContactInfoWriteRepository>();
 
         services.AddScoped<IEducationReadRepository, EducationReadRepository>();
         services.AddScoped<IEducationWriteRepository, EducationWriteRepository>();
