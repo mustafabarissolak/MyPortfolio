@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.SocialMediaAccountCommands.CreateSocialMediaAccount;
 using MyPortfolio.Application.Features.Commands.SocialMediaAccountCommands.DeleteSocialMediaAccount;
@@ -9,6 +10,7 @@ using MyPortfolio.Application.Features.Queries.SocialMediaAccountQueries.GetById
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class SocialMediaAccountController : Controller
 {
     readonly IMediator _mediator;

@@ -21,7 +21,7 @@
                                         </div>
                                         <div class="col-sm-6 col-xs-12">
                                             <div class="form-group">
-                                                <input name="email" class="form-control"placeholder="Email*" required>
+                                                <input name="email" class="form-control" placeholder="Email*" required>
                                             </div>
                                         </div>
                                     </div>
@@ -49,41 +49,47 @@
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                     <div class="col-md-offset-1 col-md-5 col-sm-6">
                         <div class="single-contact-box">
-                            <div class="contact-adress">
-                                <div class="contact-add-head">
-                                    <h3>browny star</h3>
-                                    <p>uI/uX designer</p>
+                            @if (Model.ContactInfoDtoModel is not null)
+                            {
+                                <div class="contact-adress">
+                                    <div class="contact-add-head">
+                                        <h3>@Model.ContactInfoDtoModel.FullName</h3>
+                                        <p>@Model.ContactInfoDtoModel.Job</p>
+                                    </div>
+                                    <div class="contact-add-info">
+                                        <div class="single-contact-add-info">
+                                            <h3>Telefon</h3>
+                                            <p>@Model.ContactInfoDtoModel.PhoneNumber</p>
+                                        </div>
+                                        <div class="single-contact-add-info">
+                                            <h3>E-Mail</h3>
+                                            <p>@Model.ContactInfoDtoModel.Email</p>
+                                        </div>
+                                        <div class="single-contact-add-info">
+                                            <h3>Web Site</h3>
+                                            <p>@Model.ContactInfoDtoModel.WebSite</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="contact-add-info">
-                                    <div class="single-contact-add-info">
-                                        <h3>phone</h3>
-                                        <p>987-123-6547</p>
-                                    </div>
-                                    <div class="single-contact-add-info">
-                                        <h3>email</h3>
-                                        <p>browny@info.com</p>
-                                    </div>
-                                    <div class="single-contact-add-info">
-                                        <h3>website</h3>
-                                        <p>www.brownsine.com</p>
-                                    </div>
+                            }
+
+                            @if (Model.SocialMediaAccountModels is not null)
+                            {
+                                <div class="hm-foot-icon">
+                                    <ul>
+                                        @foreach (var item in Model.SocialMediaAccountModels)
+                                        {
+                                            <li><a href="@item.Url"><i class="@item.IconCode"></i></a></li>
+                                        }
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="hm-foot-icon">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
+                            }
+
                         </div>
                     </div>
                 </div>

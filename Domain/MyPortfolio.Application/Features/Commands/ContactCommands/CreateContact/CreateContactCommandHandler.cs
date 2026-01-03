@@ -23,6 +23,16 @@ public class CreateContactCommandHandler : IRequestHandler<CreateContactCommandR
         });
 
         await _contactWriteRepository.SaveAsync();
-        return new();
+        return new()
+        {
+            ContactMessage = new()
+            {
+                Name = request.Name,
+                Email = request.Email,
+                Subject = request.Subject,
+                Message = request.Message,
+                SendDate = DateTime.Now
+            }
+        };
     }
 }

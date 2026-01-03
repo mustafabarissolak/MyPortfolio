@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.SkillCommand.CreateSkill;
 using MyPortfolio.Application.Features.Commands.SkillCommand.DeleteSkill;
@@ -9,6 +10,7 @@ using MyPortfolio.Application.Features.Queries.SkillQueries.GetByIdSkills;
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class SkillController : Controller
 {
     private readonly IMediator _mediator;

@@ -1,3 +1,8 @@
-﻿namespace MyPortfolio.Application.Features.Commands.ContactCommands.CreateContact;
+﻿using MyPortfolio.Application.DTOs;
 
-public class CreateContactCommandResponse{}
+namespace MyPortfolio.Application.Features.Commands.ContactCommands.CreateContact;
+
+public class CreateContactCommandResponse
+{
+    public ContactDto? ContactMessage { get; set; }
+}

@@ -2,5 +2,5 @@
 
 public enum SeedRoles
 {
-    Normal, Admin, SuperAdmin
+    User, Admin
 }

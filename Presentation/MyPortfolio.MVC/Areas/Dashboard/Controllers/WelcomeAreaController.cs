@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.WelcomeAreaCommands.CreateWelcomeArea;
 using MyPortfolio.Application.Features.Commands.WelcomeAreaCommands.DeleteWelcomeArea;
@@ -10,6 +11,7 @@ using MyPortfolio.Application.Features.Queries.WelcomeAreaQueries.GetSingleWelco
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class WelcomeAreaController : Controller
 {
     readonly IMediator _mediator;

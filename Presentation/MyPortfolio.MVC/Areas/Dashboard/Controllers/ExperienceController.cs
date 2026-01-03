@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.ExperienceCommands.CreateExperience;
 using MyPortfolio.Application.Features.Commands.ExperienceCommands.DeleteExperience;
@@ -9,6 +10,7 @@ using MyPortfolio.Application.Features.Queries.ExperienceQueries.GetByIdExperien
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class ExperienceController : Controller
 {
     readonly IMediator _mediator;

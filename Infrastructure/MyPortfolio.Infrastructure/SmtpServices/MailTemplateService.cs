@@ -1,0 +1,151 @@
+﻿using MyPortfolio.Application.DTOs;
+
+namespace MyPortfolio.Infrastructure.SmtpServices;
+
+public class MailTemplateService : IMailTemplateService
+{
+    private readonly IEmailSender _emailSender;
+
+    public MailTemplateService(IEmailSender emailSender)
+    {
+        _emailSender = emailSender;
+    }
+
+    //private readonly UserManager<ApplicationUser> _userManager;
+
+    //public MailTemplateService(IEmailSender emailSender, UserManager<ApplicationUser> userManager)
+    //{
+    //    _emailSender = emailSender;
+    //    _userManager = userManager;
+    //}
+
+    //private async Task<string?> GetAdminEmailAsync()
+    //{
+    //    var admins = await _userManager.GetUsersInRoleAsync("Admin");
+
+    //    var admin = admins.FirstOrDefault();
+    //    return admin?.Email;
+    //}
+
+    //public async Task SendPasswordResetMailAsync(string resetLink)
+    //{
+    //    var adminEmail = await GetAdminEmailAsync();
+
+    //    var subject = "Şifre Sıfırlama Talebi";
+    //    var body = $@"<table width='100%' cellpadding='0' cellspacing='0' style='background:#f4f4f4; padding:40px 0; font-family:Arial, sans-serif;'>
+    //                        <tr>
+    //                            <td align='center'>
+    //                                <table width='600' cellpadding='0' cellspacing='0' style='background:white; border-radius:8px; overflow:hidden;'>
+    //                                    <tr>
+    //                                        <td style='background:#2D89EF; padding:20px; text-align:center; color:white; font-size:24px; font-weight:bold;'>
+    //                                            Şifre Sıfırlama Talebi
+    //                                        </td>
+    //                                    </tr>
+    //                                    <tr>
+    //                                        <td style='padding:30px; color:#444; font-size:16px; line-height:1.6;'>
+    //                                            Merhaba,<br><br>
+    //                                            Hesabınız için bir <strong>şifre sıfırlama</strong> talebi oluşturuldu.<br>
+    //                                            Eğer bu isteği siz yapmadıysanız bu mesajı göz ardı edebilirsiniz.
+    //                                            <br><br>
+    //                                            Aşağıdaki butona tıklayarak şifrenizi sıfırlayabilirsiniz:
+    //                                            <br><br>
+    //                                            <a href='{resetLink}'
+    //                                               style='background:#2D89EF; color:white; padding:12px 25px; text-decoration:none;
+    //                                                      font-size:16px; border-radius:6px; display:inline-block;'>
+    //                                                Şifreyi Sıfırla
+    //                                            </a>
+    //                                            <br><br>
+    //                                            Güvenliğiniz bizim için önemlidir.
+    //                                            <br><br>
+    //                                            Saygılarımızla... <br>
+    //                                        </td>
+    //                                    </tr>
+    //                                    <tr>
+    //                                        <td style='background:#f0f0f0; padding:15px; text-align:center; font-size:12px; color:#888;'>
+    //                                            Bu e-posta otomatik olarak oluşturulmuştur. Lütfen yanıtlamayınız.
+    //                                        </td>
+    //                                    </tr>
+    //                                </table>
+    //                            </td>
+    //                        </tr>
+    //                    </table>";
+
+    //    await _emailSender.SendEmailAsync(adminEmail!, subject, body);
+    //}
+
+    public async Task SendContactMessageNotificationAsync(ContactDto message)
+    {
+        //var adminEmail = await GetAdminEmailAsync();
+        var adminEmail = "mustafabarissolak@gmail.com";
+
+        //if (string.IsNullOrEmpty(adminEmail))
+        //    throw new Exception("Admin email adresi bulunamadı.");
+
+        var subject = $"Yeni ziyaretçi mesajı: {message.Subject}";
+        var body = $@"
+                        <table width='100%' cellpadding='0' cellspacing='0' style='background:#f4f4f4; padding:40px 0; font-family:Arial, sans-serif;'>
+                            <tr>
+                                <td align='center'>
+                                    <table width='600' cellpadding='0' cellspacing='0' style='background:white; border-radius:8px; overflow:hidden;'>
+                
+                                        <tr>
+                                            <td style='background:#28A745; padding:20px; text-align:center; color:white; font-size:22px; font-weight:bold;'>
+                                                Yeni Ziyaretçi Mesajı
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style='padding:30px; color:#444; font-size:15px; line-height:1.6;'>
+
+                                                <p>Bir ziyaretçi size mesaj göncerdi. Detaylar:</p>
+
+                                                <table cellpadding='6' cellspacing='0' width='100%' style='border-collapse:collapse; margin-top:10px;'>
+                            
+                                                    <tr>
+                                                        <td width='150' style='font-weight:bold; border-bottom:1px solid #eee;'>Ad</td>
+                                                        <td style='border-bottom:1px solid #eee;'>{message.Name}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style='font-weight:bold; border-bottom:1px solid #eee;'>Email</td>
+                                                        <td style='border-bottom:1px solid #eee;'>{message.Email}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style='font-weight:bold; border-bottom:1px solid #eee;'>Konu</td>
+                                                        <td style='border-bottom:1px solid #eee;'>{message.Subject}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style='font-weight:bold;'>Tarih</td>
+                                                        <td>{message.SendDate}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style='font-weight:bold; border-bottom:1px solid #eee; vertical-align:top;'>Mesaj</td>
+                                                        <td style='border-bottom:1px solid #eee;'>{message.Message}</td>
+                                                    </tr>
+
+                                                </table>
+
+                                                <br>
+                                                <p style='font-size:13px; color:#888;'>Bu mail Özgür Yaşar Mimarlık web sitesi tarafından otomatik olarak gönderilmiştir.</p>
+
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style='background:#f0f0f0; padding:15px; text-align:center; font-size:12px; color:#777;'>
+                                                © 2025 Ozgur Yasar Mimarlik — Web Site Bildirimi
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        ";
+
+        await _emailSender.SendEmailAsync(adminEmail, subject, body);
+    }
+}

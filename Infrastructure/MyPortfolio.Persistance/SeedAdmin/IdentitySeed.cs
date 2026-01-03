@@ -15,12 +15,12 @@ public static class IdentitySeed
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
-        // SuperAdmin config bind
+        // Admin config bind
         var seedData = new IdentitySeedData
         {
-            SuperAdminEmail = configuration["SuperAdmin:Email"]!,
-            SuperAdminUserName = configuration["SuperAdmin:UserName"]!,
-            SuperAdminPassword = configuration["SuperAdmin:Password"]!
+            AdminEmail = configuration["Admin:Email"]!,
+            AdminUserName = configuration["Admin:UserName"]!,
+            AdminPassword = configuration["Admin:Password"]!
         };
 
         // Roller
@@ -37,24 +37,24 @@ public static class IdentitySeed
             }
         }
 
-        // SuperAdmin
-        var superAdmin = await userManager.FindByEmailAsync(seedData.SuperAdminEmail);
+        // Admin
+        var Admin = await userManager.FindByEmailAsync(seedData.AdminEmail);
 
-        if (superAdmin == null)
+        if (Admin == null)
         {
-            superAdmin = new AppUser
+            Admin = new AppUser
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = seedData.SuperAdminUserName,
-                Email = seedData.SuperAdminEmail,
-                EmailConfirmed = true
+                UserName = seedData.AdminUserName,
+                Email = seedData.AdminEmail,
+                EmailConfirmed = false,
             };
 
-            var result = await userManager.CreateAsync(superAdmin, seedData.SuperAdminPassword);
+            var result = await userManager.CreateAsync(Admin, seedData.AdminPassword);
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(superAdmin, SeedRoles.SuperAdmin.ToString());
+                await userManager.AddToRoleAsync(Admin, SeedRoles.Admin.ToString());
             }
         }
     }

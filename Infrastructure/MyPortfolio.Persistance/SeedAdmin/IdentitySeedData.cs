@@ -2,7 +2,7 @@
 
 public class IdentitySeedData
 {
-    public string SuperAdminEmail { get; set; } = default!;
-    public string SuperAdminUserName { get; set; } = default!;
-    public string SuperAdminPassword { get; set; } = default!;
+    public string AdminEmail { get; set; } = default!;
+    public string AdminUserName { get; set; } = default!;
+    public string AdminPassword { get; set; } = default!;
 }

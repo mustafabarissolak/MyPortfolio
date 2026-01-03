@@ -1,6 +1,8 @@
-﻿using MyPortfolio.Application;
+﻿using Microsoft.AspNetCore.Identity;
+using MyPortfolio.Application;
 using MyPortfolio.Infrastructure;
 using MyPortfolio.Infrastructure.Storages.Local;
+using MyPortfolio.MVC;
 using MyPortfolio.Persistance;
 using MyPortfolio.Persistance.SeedAdmin;
 
@@ -8,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistanceService(builder.Configuration);
 builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureService();
+builder.Services.AddInfrastructureService(builder.Configuration);
 builder.Services.AddStorage<LocalStorage>();
-
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthenticationServices();
 
 var app = builder.Build();
 
@@ -23,13 +25,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); 
+app.MapStaticAssets();
+
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "areas",
@@ -40,6 +43,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.ContactCommands.DeleteContact;
 using MyPortfolio.Application.Features.Queries.ContactQueries.GetAllContact;
@@ -6,6 +7,7 @@ using MyPortfolio.Application.Features.Queries.ContactQueries.GetAllContact;
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class ContactController : Controller
 {
     readonly IMediator _mediator;

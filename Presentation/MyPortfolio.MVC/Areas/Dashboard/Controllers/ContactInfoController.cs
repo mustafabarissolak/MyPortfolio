@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.ContactInfoCommands.CreateContactInfo;
 using MyPortfolio.Application.Features.Commands.ContactInfoCommands.DeleteContactInfo;
@@ -9,6 +10,7 @@ using MyPortfolio.Application.Features.Queries.ContactInfoQueries.GetSingleConta
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class ContactInfoController : Controller
 {
     readonly IMediator _mediator;

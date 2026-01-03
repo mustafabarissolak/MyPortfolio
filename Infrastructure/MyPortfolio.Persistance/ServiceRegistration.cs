@@ -53,8 +53,8 @@ public static class ServiceRegistration
 
             // db'de benzersiz email
             options.User.RequireUniqueEmail = true;
-        }).AddEntityFrameworkStores<AppDbContext>()
-          .AddDefaultTokenProviders();
+
+        }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
         #region DI Repositories
         services.AddScoped<ISkillReadRepository, SkillReadRepository>();

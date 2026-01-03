@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.AboutCommands.CreateAbout;
 using MyPortfolio.Application.Features.Commands.AboutCommands.DeleteAbout;
@@ -10,6 +11,7 @@ namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class AboutController : Controller
 {
     readonly IMediator _mediator;

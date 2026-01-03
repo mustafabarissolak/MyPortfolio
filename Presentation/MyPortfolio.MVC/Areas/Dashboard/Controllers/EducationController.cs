@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.Features.Commands.EducationCommands.CreateEducation;
 using MyPortfolio.Application.Features.Commands.EducationCommands.DeleteEducation;
@@ -9,6 +10,7 @@ using MyPortfolio.Application.Features.Queries.EducationQueries.GetByIdEducation
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 
 [Area("Dashboard")]
+[Authorize(Roles = "Admin")]
 public class EducationController : Controller
 {
     readonly IMediator _mediator;
