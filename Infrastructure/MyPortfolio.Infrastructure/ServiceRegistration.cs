@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyPortfolio.Application.Services;
 using MyPortfolio.Application.Storages;
+using MyPortfolio.Infrastructure.Services;
 using MyPortfolio.Infrastructure.SmtpServices;
 using MyPortfolio.Infrastructure.Storages;
 using MyPortfolio.Infrastructure.Storages.Local;
@@ -21,6 +23,7 @@ public static class ServiceRegistration
         services.Configure<SmtpSettings>(configuration.GetSection("Smtp"));
         services.AddTransient<IMailTemplateService, MailTemplateService>();
         services.AddScoped<IEmailSender, EmailSender>();
+        services.AddScoped<IAuthService,AuthService>();
     }
 
     public static void AddStorage<T>(this IServiceCollection services) where T : Storage, IStorage

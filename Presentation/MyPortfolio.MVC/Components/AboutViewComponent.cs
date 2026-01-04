@@ -25,25 +25,26 @@ public class AboutViewComponent : ViewComponent
 
         var model = new AboutViewModel
         {
-            AboutModel = new()
+            AboutModel = responseAbout.AboutDto != null ? new AboutDto
             {
-                Name = responseAbout.AboutDto!.Name,
+                Name = responseAbout.AboutDto.Name,
                 Field = responseAbout.AboutDto.Field,
                 Title = responseAbout.AboutDto.Title,
                 Description = responseAbout.AboutDto.Description,
                 ImagePath = responseAbout.AboutDto.ImagePath
-            },
-            ContactInfoDtoModel = new()
+            } : null,
+
+            ContactInfoDtoModel = responseContactInfo.ContactInfoDto != null ? new ContactInfoDto
             {
-                FullName = responseContactInfo.ContactInfoDto!.FullName,
+                FullName = responseContactInfo.ContactInfoDto.FullName,
                 Job = responseContactInfo.ContactInfoDto.Job,
                 Email = responseContactInfo.ContactInfoDto.Email,
                 Location = responseContactInfo.ContactInfoDto.Location,
                 WebSite = responseContactInfo.ContactInfoDto.WebSite,
                 PhoneNumber = responseContactInfo.ContactInfoDto.PhoneNumber
-            }
-            ,
-            SocialMediaAccountModels = responseSocialMediaAccount.SocialMediaAccountDto?.Select(socialMediaAccount => new SocialMediaAccountDto()
+            } : null,
+
+            SocialMediaAccountModels = responseSocialMediaAccount.SocialMediaAccountDto?.Select(socialMediaAccount => new SocialMediaAccountDto
             {
                 Name = socialMediaAccount.Name,
                 IconCode = socialMediaAccount.IconCode,

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MyPortfolio.Core.Entities;
+using MyPortfolio.Application.Services;
 using MyPortfolio.MVC.Models;
 
 namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
@@ -10,19 +9,15 @@ namespace MyPortfolio.MVC.Areas.Dashboard.Controllers;
 [Area("Dashboard")]
 public class AuthController : Controller
 {
-    private readonly SignInManager<AppUser> _signInManager;
-    private readonly UserManager<AppUser> _userManager;
-    public AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+    readonly IAuthService _authService;
+
+    public AuthController(IAuthService authService)
     {
-        _signInManager = signInManager;
-        _userManager = userManager;
+        _authService = authService;
     }
 
     [HttpGet]
-    public IActionResult Login()
-    {
-        return View();
-    }
+    public IActionResult Login() => View();
 
     [HttpPost]
     public async Task<IActionResult> Login(UserLoginVM model)
@@ -36,17 +31,11 @@ public class AuthController : Controller
             return View(model);
         }
 
-        var user = await _userManager.FindByNameAsync(model.UserName!);
-        if (user == null)
-        {
-            ModelState.AddModelError("", "Kullanıcı adı veya şifre yanlış.");
-            return View(model);
-        }
+        var result = await _authService.Login(model.UserName, model.Password);
 
-        var result = await _signInManager.PasswordSignInAsync(user, model.Password!, true, true);
-        if (!result.Succeeded)
+        if (result is not null)
         {
-            ModelState.AddModelError("", "Kullanıcı adı veya şifre yanlış.");
+            ModelState.AddModelError("", result);
             return View(model);
         }
 
@@ -58,31 +47,60 @@ public class AuthController : Controller
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Logout()
     {
-        await _signInManager.SignOutAsync();
+        await _authService.Logout();
         return RedirectToAction("Login");
     }
 
     [HttpGet]
-    public IActionResult ForgotPassword()
-    {
-        return View();
-    }
+    public IActionResult ForgotPassword() => View();
 
-    //[HttpPost]
-    //public IActionResult ForgotPassword()
-    //{
-    //    return View();
-    //}
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ForgotPassword(UserForgotPasswordVM model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var result = await _authService.ForgotPassword(model.Username!);
+
+        TempData["Message"] = result ?? "Şifre sıfırlama bağlantısı mail adresinize gönderildi";
+        return RedirectToAction("Login", "Auth");
+    }
 
     [HttpGet]
-    public IActionResult ResetPassword()
+    public async Task<IActionResult> ResetPassword(string userId, string token)
     {
-        return View();
+        if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            return BadRequest("Geçersiz istek.");
+
+        var model = new UserResetPasswordVM
+        {
+            UserId = userId,
+            Token = token
+        };
+
+        return View(model);
     }
 
-    //[HttpPost]
-    //public IActionResult ResetPassword()
-    //{
-    //    return View();
-    //}
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ResetPassword(UserResetPasswordVM model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var result = await _authService.ResetPasswordAsync(model.UserId, model.Token, model.NewPassword, model.ConfirmPassword);
+
+        if (result is null)
+            return NotFound();
+
+        if (result != "Şifre başarıyla sıfırlandı.")
+        {
+            ModelState.AddModelError(string.Empty, result);
+            return View(model);
+        }
+
+        TempData["Message"] = result;
+        return RedirectToAction("Login", "Auth");
+    }
 }

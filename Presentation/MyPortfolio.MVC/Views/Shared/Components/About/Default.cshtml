@@ -9,7 +9,7 @@
     <div class="container">
         <div class="about-content">
             <div class="row">
-                @if (Model?.AboutModel != null)
+                @if (Model?.AboutModel is not null)
                 {
                     <div class="col-sm-6">
                         <div class="single-about-txt">
@@ -66,26 +66,30 @@
                     </div>
                     <div class="col-sm-offset-1 col-sm-5">
                         <div class="single-about-img">
-                            <img src="@Model!.AboutModel.ImagePath" alt="profile_image" />
-                            @if (Model.SocialMediaAccountModels?.Any() == true)
-                            {
-                                <div class="about-list-icon">
-                                    <ul>
-                                        @foreach (var item in Model.SocialMediaAccountModels)
-                                        {
-                                            if (!string.IsNullOrWhiteSpace(item.Url) &&
-                                            !string.IsNullOrWhiteSpace(item.IconCode))
-                                            {
-                                                <li>
-                                                    <a href="@item.Url" target="_blank">
-                                                        <i class="@item.IconCode" aria-hidden="true"></i>
-                                                    </a>
-                                                </li>
 
+                            @if ((Model!.AboutModel.ImagePath != null))
+                            {
+                                <img src="@Model!.AboutModel.ImagePath" alt="profile_image" />
+                                @if (Model.SocialMediaAccountModels!.Any())
+                                {
+                                    <div class="about-list-icon">
+                                        <ul>
+                                            @foreach (var item in Model.SocialMediaAccountModels!)
+                                            {
+                                                if (!string.IsNullOrWhiteSpace(item.Url) &&
+                                                !string.IsNullOrWhiteSpace(item.IconCode))
+                                                {
+                                                    <li>
+                                                        <a href="@item.Url" target="_blank">
+                                                            <i class="@item.IconCode" aria-hidden="true"></i>
+                                                        </a>
+                                                    </li>
+
+                                                }
                                             }
-                                        }
-                                    </ul>
-                                </div>
+                                        </ul>
+                                    </div>
+                                }
                             }
                         </div>
                     </div>

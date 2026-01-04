@@ -13,9 +13,10 @@
                     <div class="header-text">
                         <h2>@Model.WelcomeAreaDto.TopHeading</h2>
                         <p>@Model.WelcomeAreaDto.SubHeading</p>
-                        <a href="@Model.WelcomeAreaDto.CvUrl" download>
-                            Download Resume
-                        </a>
+                        @if (@Model.WelcomeAreaDto.CvUrl is not null)
+                        {
+                            <a href="@Model.WelcomeAreaDto.CvUrl" download>Download Resume</a>
+                        }
                     </div>
                 </div>
             </div>

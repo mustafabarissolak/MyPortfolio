@@ -8,91 +8,95 @@
     {
         <div class="container">
             <div class="contact-content">
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-5 col-sm-6">
-                        <div class="single-contact-box">
-                            <div class="contact-form">
-                                <form asp-action="SendMessage" method="post">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input name="name" class="form-control" placeholder="Name*" required>
+                @if (Model.ContactInfoDtoModel.Email != null)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-5 col-sm-6">
+                            <div class="single-contact-box">
+                                <div class="contact-form">
+                                    <form asp-action="SendMessage" method="post">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input name="name" class="form-control" placeholder="Name*" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <input name="email" class="form-control" placeholder="Email*" required>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <input name="email" class="form-control" placeholder="Email*" required>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <input name="subject" class="form-control" placeholder="Subject*" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <textarea name="message" class="form-control" rows="8" placeholder="Message*" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="single-contact-btn">
+                                                    <button type="submit" class="contact-btn">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-5 col-sm-6">
+                            <div class="single-contact-box">
+                                @if (Model.ContactInfoDtoModel is not null)
+                                {
+                                    <div class="contact-adress">
+                                        <div class="contact-add-head">
+                                            <h3>@Model.ContactInfoDtoModel.FullName</h3>
+                                            <p>@Model.ContactInfoDtoModel.Job</p>
+                                        </div>
+                                        <div class="contact-add-info">
+                                            <div class="single-contact-add-info">
+                                                <h3>Telefon</h3>
+                                                <p>@Model.ContactInfoDtoModel.PhoneNumber</p>
+                                            </div>
+                                            <div class="single-contact-add-info">
+                                                <h3>E-Mail</h3>
+                                                <p>@Model.ContactInfoDtoModel.Email</p>
+                                            </div>
+                                            <div class="single-contact-add-info">
+                                                <h3>Web Site</h3>
+                                                <p>@Model.ContactInfoDtoModel.WebSite</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <input name="subject" class="form-control" placeholder="Subject*" required>
-                                            </div>
-                                        </div>
+                                }
+
+                                @if (Model.SocialMediaAccountModels!.Any())
+                                {
+                                    <div class="hm-foot-icon">
+                                        <ul>
+                                            @foreach (var item in Model.SocialMediaAccountModels!)
+                                            {
+                                                <li><a href="@item.Url"><i class="@item.IconCode"></i></a></li>
+                                            }
+                                        </ul>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <textarea name="message" class="form-control" rows="8" placeholder="Message*" required></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="single-contact-btn">
-                                                <button type="submit" class="contact-btn">
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                }
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-offset-1 col-md-5 col-sm-6">
-                        <div class="single-contact-box">
-                            @if (Model.ContactInfoDtoModel is not null)
-                            {
-                                <div class="contact-adress">
-                                    <div class="contact-add-head">
-                                        <h3>@Model.ContactInfoDtoModel.FullName</h3>
-                                        <p>@Model.ContactInfoDtoModel.Job</p>
-                                    </div>
-                                    <div class="contact-add-info">
-                                        <div class="single-contact-add-info">
-                                            <h3>Telefon</h3>
-                                            <p>@Model.ContactInfoDtoModel.PhoneNumber</p>
-                                        </div>
-                                        <div class="single-contact-add-info">
-                                            <h3>E-Mail</h3>
-                                            <p>@Model.ContactInfoDtoModel.Email</p>
-                                        </div>
-                                        <div class="single-contact-add-info">
-                                            <h3>Web Site</h3>
-                                            <p>@Model.ContactInfoDtoModel.WebSite</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
 
-                            @if (Model.SocialMediaAccountModels is not null)
-                            {
-                                <div class="hm-foot-icon">
-                                    <ul>
-                                        @foreach (var item in Model.SocialMediaAccountModels)
-                                        {
-                                            <li><a href="@item.Url"><i class="@item.IconCode"></i></a></li>
-                                        }
-                                    </ul>
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     }

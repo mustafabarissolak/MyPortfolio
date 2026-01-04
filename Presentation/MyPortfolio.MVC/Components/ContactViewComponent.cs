@@ -1,12 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Application.DTOs;
-using MyPortfolio.Application.Features.Commands.ContactCommands.CreateContact;
 using MyPortfolio.Application.Features.Queries.AboutQueries.GetSingleAbout;
 using MyPortfolio.Application.Features.Queries.ContactInfoQueries.GetSingleContactInfo;
 using MyPortfolio.Application.Features.Queries.SocialMediaAccountQueries.GetAllSocialMediaAccount;
 using MyPortfolio.MVC.Models;
-using System.Threading.Tasks;
 
 namespace MyPortfolio.MVC.Components;
 
@@ -27,15 +25,15 @@ public class ContactViewComponent : ViewComponent
 
         ContactVM model = new()
         {
-            AboutModel = new()
+            AboutModel = responseAbout?.AboutDto != null ? new()
             {
                 Name = responseAbout.AboutDto!.Name,
                 Field = responseAbout.AboutDto.Field,
                 Title = responseAbout.AboutDto.Title,
                 Description = responseAbout.AboutDto.Description,
                 ImagePath = responseAbout.AboutDto.ImagePath
-            },
-            ContactInfoDtoModel = new()
+            }:null,
+            ContactInfoDtoModel = responseContactInfo?.ContactInfoDto != null ? new()
             {
                 FullName = responseContactInfo.ContactInfoDto!.FullName,
                 Job = responseContactInfo.ContactInfoDto.Job,
@@ -43,7 +41,7 @@ public class ContactViewComponent : ViewComponent
                 Location = responseContactInfo.ContactInfoDto.Location,
                 WebSite = responseContactInfo.ContactInfoDto.WebSite,
                 PhoneNumber = responseContactInfo.ContactInfoDto.PhoneNumber
-            },
+            } : null,
             SocialMediaAccountModels = responseSocialMediaAccount.SocialMediaAccountDto?.Select(socialMediaAccount => new SocialMediaAccountDto()
             {
                 Name = socialMediaAccount.Name,

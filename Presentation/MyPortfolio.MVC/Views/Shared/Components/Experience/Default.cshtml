@@ -11,7 +11,6 @@
                 <ul>
                     @if (Model.ExperienceDtoList is not null && Model.ExperienceDtoList.Any())
                     {
-                        byte sayac = 1;
                         @foreach (var item in Model.ExperienceDtoList)
                         {
                             <li>
@@ -46,93 +45,3 @@
         </div>
     </div>
 </section>
-
-
-@* 
-<section id="experience" class="experience">
-    <div class="section-heading text-center">
-        <h2>Deneyim</h2>
-    </div>
-    <div class="container">
-        <div class="experience-content">
-            <div class="main-timeline">
-                <ul>
-                    @for (int i = 0; i < Model.ExperienceDtoList.Count; i++)
-                    {
-                        var item = Model.ExperienceDtoList[i];
-                        bool isEven = i % 2 == 0;
-
-                        <li>
-                            <div class="single-timeline-box fix">
-                                <div class="row">
-
-                                    @if (isEven)
-                                    {
-                                        <div class="col-md-5">
-                                            <div class="experience-time text-right">
-                                                <h2>
-                                                    @item.StartDate!.Value.Year -
-                                                    @(item.EndDate == null ? "Halen" : item.EndDate.Value.Year)
-                                                </h2>
-                                                <h3>title</h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-offset-1 col-md-5">
-                                            <div class="timeline">
-                                                <div class="timeline-content">
-                                                    <h4 class="title">
-                                                        <span><i class="fa fa-circle"></i></span>
-                                                        @item.CompanyName
-                                                    </h4>
-                                                    <h5>@item.Location</h5>
-                                                    <p class="description">@item.Description</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-md-offset-1 col-md-5 experience-time-responsive">
-                                            <div class="experience-time">
-                                                <h2>
-                                                    <span><i class="fa fa-circle"></i></span>
-                                                    @item.StartDate!.Value.Year -
-                                                    @(item.EndDate == null ? "Halen" : item.EndDate.Value.Year)
-                                                </h2>
-                                                <h3>title</h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-5">
-                                            <div class="timeline">
-                                                <div class="timeline-content text-right">
-                                                    <h4 class="title">@item.CompanyName</h4>
-                                                    <h5>@item.Location</h5>
-                                                    <p class="description">@item.Description</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-offset-1 col-md-5 experience-time-main">
-                                            <div class="experience-time">
-                                                <h2>
-                                                    <span><i class="fa fa-circle"></i></span>
-                                                    @item.StartDate!.Value.Year -
-                                                    @(item.EndDate == null ? "Halen" : item.EndDate.Value.Year)
-                                                </h2>
-                                                <h3>title</h3>
-                                            </div>
-                                        </div>
-                                    }
-
-                                </div>
-                            </div>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
-
-</section> *@
