@@ -25,6 +25,12 @@
             </div>
 
             <div class="form-floating mb-3">
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email">E-Mail</label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
                 <input asp-for="PhoneNumber" class="form-control" />
                 <label asp-for="PhoneNumber">Telefon Numarası</label>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>

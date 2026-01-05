@@ -1,4 +1,6 @@
-﻿namespace MyPortfolio.Application.DTOs;
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace MyPortfolio.Application.DTOs;
 
 public class AboutDto : BaseDto
 {

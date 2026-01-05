@@ -84,7 +84,7 @@ public class AuthService : IAuthService
         if (result.Succeeded)
             return "Şifre başarıyla sıfırlandı.";
         else
-            return string.Join(", ", result.Errors.Select(e => e.Description));
+            return string.Join("\n", result.Errors.Select(e => e.Description));
     }
 
 }

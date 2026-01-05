@@ -1,1 +1,82 @@
-﻿account controller
+﻿@model UserVM
+
+@{
+    ViewData["Title"] = "Hesabim";
+}
+<form asp-action="Index" method="post">
+    @Html.AntiForgeryToken()
+<div class="row">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success text-center mt-3">
+                @TempData["Message"]
+            </div>
+        }
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger text-center mt-3">
+                @Html.ValidationSummary()
+            </div>
+        }
+
+        <div class="col-md-6">
+            <div class="bg-secondary rounded p-4"> 
+
+                <h6 class="mb-4 text-center"> Kullanici Hesap Bilgiler</h6>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserInfoModel.FirstName" class="form-control" />
+                    <label asp-for="UserInfoModel.FirstName">Ad</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserInfoModel.LastName" class="form-control" />
+                    <label asp-for="UserInfoModel.LastName">Soyad</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserInfoModel.Email" class="form-control" />
+                    <label asp-for="UserInfoModel.Email">Email</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserInfoModel.UserName" class="form-control" />
+                    <label asp-for="UserInfoModel.UserName">Kullanici Adi</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserInfoModel.PhoneNumber" class="form-control" />
+                    <label asp-for="UserInfoModel.PhoneNumber">Telefon Numarasi</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="bg-secondary rounded p-4">
+
+                <h6 class="mb-4 text-center">Sifre</h6>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserPasswordModel.CurrentPassword" type="password" class="form-control" />
+                    <label asp-for="UserPasswordModel.CurrentPassword">Mevcut Sifre</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserPasswordModel.NewPassword" type="password" class="form-control" />
+                    <label asp-for="UserPasswordModel.NewPassword">Yeni Sifre</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="UserPasswordModel.NewPasswordConfirm" type="password" class="form-control" />
+                    <label asp-for="UserPasswordModel.NewPasswordConfirm">Yeni Sifre (Tekrar)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="bg-secondary rounded p-4">
+            <button type="submit" class="btn btn-outline-success">Kaydet</button>
+        </div>
+    </div>
+</form>

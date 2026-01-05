@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyPortfolio.Application.Repositories.AboutRepositories;
@@ -11,7 +10,6 @@ using MyPortfolio.Application.Repositories.ImageRepositories;
 using MyPortfolio.Application.Repositories.SkillRepositores;
 using MyPortfolio.Application.Repositories.SocialMediaAccountRepositories;
 using MyPortfolio.Application.Repositories.WelcomeAreaRepositories;
-using MyPortfolio.Core.Entities;
 using MyPortfolio.Persistance.Context;
 using MyPortfolio.Persistance.Repositories.AboutRepositories;
 using MyPortfolio.Persistance.Repositories.ContactInfoRepositories;
@@ -37,24 +35,6 @@ public static class ServiceRegistration
                     sql.MigrationsAssembly("MyPortfolio.Persistance");
                 });
         });
-
-        services.AddIdentity<AppUser, AppRole>(options =>
-        {
-            // sifre kurallari
-            options.Password.RequiredLength = 6;
-            options.Password.RequireDigit = true;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireUppercase = true;
-            options.Password.RequireNonAlphanumeric = true;
-
-            options.Lockout.MaxFailedAccessAttempts = 5;
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            options.Lockout.AllowedForNewUsers = true; // yeni kullanıcılar icin de hesap kilitleme aktif olsun mu?
-
-            // db'de benzersiz email
-            options.User.RequireUniqueEmail = true;
-
-        }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
         #region DI Repositories
         services.AddScoped<ISkillReadRepository, SkillReadRepository>();
